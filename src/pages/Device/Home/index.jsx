@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
-import { logout, getAllUsers, deleteUser, changeStatusUser } from '../../../services/User';
+import { logout } from '../../../services/User';
 import { useNavigate } from 'react-router-dom';
-import { devices } from './data';
+import { changeStatusDevice, deleteDevice, getAllDevices } from '../../../services/Device';
 
 const Home = () => {
-    // const [users, setUsers] = useState([]);
+    const [devices, setDevices] = useState([]);
 
     const navigate = useNavigate();
     const cookies = new Cookies();
@@ -17,23 +17,23 @@ const Home = () => {
         navigate('/');
     };
 
-    const handleDelete = (userId) => {
-        if (window.confirm('Tem certeza que deseja excluir este usuário?')) {
-            deleteUser(userId)
+    const handleDelete = (deviceId) => {
+        if (window.confirm('Tem certeza que deseja excluir este dispositivo?')) {
+            deleteDevice(deviceId)
                 .then(() => {
                     window.location.reload();
                 })
-                .catch(error => console.error('Erro ao excluir usuário:', error));
+                .catch(error => console.error('Erro ao excluir dispositivo:', error));
         }
     };
 
-    const handleChangeStatus = (userId) => {
-        if (window.confirm('Tem certeza que deseja mudar o status este usuário?')) {
-            changeStatusUser(userId)
+    const handleChangeStatus = (deviceId) => {
+        if (window.confirm('Tem certeza que deseja mudar o status este dispositivo?')) {
+            changeStatusDevice(deviceId)
                 .then(() => {
                     window.location.reload();
                 })
-                .catch(error => console.error('Erro ao mudar o status do usuário:', error));
+                .catch(error => console.error('Erro ao mudar o status do dispositivo:', error));
         }
     };
 
@@ -45,15 +45,15 @@ const Home = () => {
         return `${day}/${month}/${year}`;
     };
 
-    // useEffect(() => {
-    //     if (!token) {
-    //         navigate('/');
-    //     } else {
-    //         getAllUsers().then(response => response)
-    //             .then(data => setUsers(data))
-    //             .catch(error => console.error('Erro ao obter usuários:', error));
-    //     }
-    // }, [token]);
+    useEffect(() => {
+        if (!token) {
+            navigate('/');
+        } else {
+            getAllDevices().then(response => response)
+                .then(data => setDevices(data))
+                .catch(error => console.error('Erro ao obter dispositivos:', error));
+        }
+    }, [token]);
 
     return (
         <div className="m-5">
@@ -94,7 +94,7 @@ const Home = () => {
                             <td>{device.description}</td>
                             <td>{device.status ? 'Ativo' : 'Desativo'}</td>
                             <td>{device.manufacturer}</td>
-                            <td>{formatDate(device.last_seen)}</td>
+                            <td>{formatDate(device.createdAt)}</td>
                             <td>
                                 <a href={`/device/edit/${device.id}`} className="btn btn-primary me-1">Editar</a>
                                 <a href={`/device/details/${device.id}`} className="btn btn-info me-1">Sobre</a>
