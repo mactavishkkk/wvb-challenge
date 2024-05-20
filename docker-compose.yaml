@@ -4,7 +4,7 @@ networks:
 
 services:
   wvb-challenge-app:
-    container_name: docker-ums
+    container_name: docker-wvb
     ports:
       - "3001:3000"
     build: 
