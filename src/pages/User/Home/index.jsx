@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
 import { logout, getAllUsers, deleteUser, changeStatusUser } from '../../../services/User';
 import { useNavigate } from 'react-router-dom';
-import { users } from './data';
 
 const Home = () => {
-    // const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState([]);
 
     const navigate = useNavigate();
     const cookies = new Cookies();
@@ -45,15 +44,15 @@ const Home = () => {
         return `${day}/${month}/${year}`;
     };
 
-    // useEffect(() => {
-    //     if (!token) {
-    //         navigate('/');
-    //     } else {
-    //         getAllUsers().then(response => response)
-    //             .then(data => setUsers(data))
-    //             .catch(error => console.error('Erro ao obter usuários:', error));
-    //     }
-    // }, [token]);
+    useEffect(() => {
+        if (!token) {
+            navigate('/');
+        } else {
+            getAllUsers().then(response => response)
+                .then(data => setUsers(data))
+                .catch(error => console.error('Erro ao obter usuários:', error));
+        }
+    }, [token]);
 
     return (
         <div className="m-5">

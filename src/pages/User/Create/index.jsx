@@ -39,17 +39,17 @@ const Create = () => {
         try {
             await createUser(userData);
             alert('Usuário criado com sucesso!');
-            navigate('/home');
+            navigate('/user/home');
         } catch (error) {
             console.error('Failed to create user:', error);
         }
     };
 
-    // useEffect(() => {
-    //     if (!token) {
-    //         navigate('/');
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (!token) {
+            navigate('/');
+        }
+    }, []);
 
     return (
         <div className="m-5">
