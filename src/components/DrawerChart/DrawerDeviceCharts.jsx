@@ -1,37 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { getAllUsers } from '../../services/User';
 import * as d3 from 'd3';
+import { getAllDevices } from '../../services/Device';
 
-const DrawerCharts = () => {
-    const [users, setUsers] = useState([]);
+const DrawerDeviceCharts = () => {
+    const [devices, setDevices] = useState([]);
     const [chartDrawn, setChartDrawn] = useState(false);
 
     useEffect(() => {
-        getAllUsers()
+        getAllDevices()
             .then(data => {
-                setUsers(data);
+                setDevices(data);
             })
-            .catch(error => console.error('Erro ao obter usuários:', error));
+            .catch(error => console.error('Erro ao obter dispositivos:', error));
     }, []);
 
     useEffect(() => {
-        if (!chartDrawn && users.length > 0) {
-            drawChart(users);
+        if (!chartDrawn && devices.length > 0) {
+            drawChart(devices);
             setChartDrawn(true);
         }
-    }, [users, chartDrawn]);
+    }, [devices, chartDrawn]);
 
-    const countActiveUsers = (users) => {
-        return users.filter(user => user.status).length;
+    const countActiveDevices = (devices) => {
+        return devices.filter(device => device.status).length;
     };
 
-    const countInactiveUsers = (users) => {
-        return users.filter(user => !user.status).length;
+    const countInactiveDevices = (devices) => {
+        return devices.filter(device => !device.status).length;
     };
 
     const drawChart = (data) => {
-        const activeUsers = countActiveUsers(data);
-        const inactiveUsers = countInactiveUsers(data);
+        const activeDevices = countActiveDevices(data);
+        const inactiveDevices = countInactiveDevices(data);
 
         const svg = d3.select('#chart-container')
             .append('svg')
@@ -44,19 +45,19 @@ const DrawerCharts = () => {
 
         const color = d3.scaleOrdinal()
             .domain(['Ativos', 'Inativos'])
-            .range(['#66c2a5', '#fc8d62']);
+            .range(['#66c2a5', '#E14C2E']);
 
         const pie = d3.pie()
             .value(d => d.value);
 
         const dataPie = pie([
-            { label: 'Ativos', value: activeUsers },
-            { label: 'Inativos', value: inactiveUsers }
+            { label: 'Ativos', value: activeDevices },
+            { label: 'Inativos', value: inactiveDevices }
         ]);
 
         const arc = d3.arc()
             .innerRadius(0)
-            .outerRadius(radius - 10);
+            .outerRadius(radius);
 
         const arcLabel = d3.arc()
             .innerRadius(radius - 40)
@@ -88,4 +89,4 @@ const DrawerCharts = () => {
     );
 };
 
-export default DrawerCharts;
+export default DrawerDeviceCharts;

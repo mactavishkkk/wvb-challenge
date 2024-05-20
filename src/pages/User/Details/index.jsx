@@ -11,22 +11,22 @@ const Details = () => {
     const cookies = new Cookies();
     const token = cookies.get('token');
 
-    // useEffect(() => {
-    //     if (!token) {
-    //         navigate('/');
-    //     } else {
-    //         const fetchUserDetails = async () => {
-    //             try {
-    //                 const userData = await getUserById(id);
-    //                 setUserDetails(userData);
-    //             } catch (error) {
-    //                 console.error('Error fetching user details:', error);
-    //             }
-    //         };
+    useEffect(() => {
+        if (!token) {
+            navigate('/');
+        } else {
+            const fetchUserDetails = async () => {
+                try {
+                    const userData = await getUserById(id);
+                    setUserDetails(userData);
+                } catch (error) {
+                    console.error('Error fetching user details:', error);
+                }
+            };
 
-    //         fetchUserDetails();
-    //     }
-    // }, [id]);
+            fetchUserDetails();
+        }
+    }, [id]);
 
     const handleEditClick = () => {
         navigate(`/user/edit/${id}`);

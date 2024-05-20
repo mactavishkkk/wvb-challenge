@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import DrawerChart from '../../../components/DrawerChart';
+import DrawerChart from '../../../components/DrawerChart/DrawerDeviceCharts';
 
 const Charts = () => {
     return (
@@ -10,7 +10,7 @@ const Charts = () => {
                 <a className="btn btn-primary m-2" href={`/device/home`}>Dispositivos</a>
             </p>
             <div>
-                <h2>Relação de ...</h2>
+                <h2>Relação de Dispositivos Ativos</h2>
                 <DrawerChart />
             </div>
         </div>

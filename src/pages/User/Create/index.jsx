@@ -39,17 +39,17 @@ const Create = () => {
         try {
             await createUser(userData);
             alert('Usuário criado com sucesso!');
-            navigate('/home');
+            navigate('/user/home');
         } catch (error) {
             console.error('Failed to create user:', error);
         }
     };
 
-    // useEffect(() => {
-    //     if (!token) {
-    //         navigate('/');
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (!token) {
+            navigate('/');
+        }
+    }, []);
 
     return (
         <div className="m-5">
@@ -66,19 +66,38 @@ const Create = () => {
                     <div className="text-danger"></div>
                     <div className="form-group">
                         <label htmlFor="Name" className="control-label">Nome</label>
-                        <input type="text" id="Name" name="Name" className="form-control mb-3" placeholder='Nome' required />
+                        <input type="text"
+                            id="Name"
+                            name="Name"
+                            className="form-control mb-3"
+                            placeholder='Nome'
+                            required />
                     </div>
                     <div className="form-group">
                         <label htmlFor="lastName" className="control-label">Sobrenome</label>
-                        <input type="text" id="lastName" name="lastName" className="form-control mb-3" placeholder='Sobrenome' required />
+                        <input type="text"
+                            id="lastName"
+                            name="lastName"
+                            className="form-control mb-3"
+                            placeholder='Sobrenome'
+                            required />
                     </div>
                     <div className="form-group">
                         <label htmlFor="Email" className="control-label">Email</label>
-                        <input type="email" id="Email" name="Email" className="form-control mb-3" placeholder='exemplo@gmail.com' required />
+                        <input type="email"
+                            id="Email"
+                            name="Email"
+                            className="form-control mb-3"
+                            placeholder='exemplo@gmail.com'
+                            required />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password" className="control-label">Senha</label>
-                        <input type="password" id="password" name="password" className="form-control mb-3" placeholder='A senha deve possuir no mínimo 6 caracteres' required/>
+                        <input type="password"
+                            id="password"
+                            name="password"
+                            className="form-control mb-3"
+                            placeholder='A senha deve possuir no mínimo 6 caracteres' required />
                     </div>
                     <div className="form-group">
                         <BooleanInput

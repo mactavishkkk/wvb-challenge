@@ -29,13 +29,13 @@ const Edit = () => {
         }
     };
 
-    // useEffect(() => {
-    //     if (!token) {
-    //         navigate('/');
-    //     } else {
-    //         fetchUserById(id);
-    //     }
-    // }, [id]);
+    useEffect(() => {
+        if (!token) {
+            navigate('/');
+        } else {
+            fetchUserById(id);
+        }
+    }, [id]);
 
     const handleChange = (event) => {
         const { name, value, type, checked } = event.target;
@@ -69,12 +69,42 @@ const Edit = () => {
             <div className="col-8">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
+                        <label htmlFor="firstName" className="control-label">Nome</label>
+                        <input type="text"
+                            id="firstName"
+                            name="firstName"
+                            className="form-control mb-3"
+                            value={user.firstName}
+                            onChange={handleChange}
+                            placeholder='Nome' />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="lastName" className="control-label">Sobrenome</label>
+                        <input type="text"
+                            id="lastName"
+                            name="lastName"
+                            className="form-control mb-3"
+                            value={user.lastName}
+                            onChange={handleChange}
+                            placeholder='Sobrenome' />
+                    </div>
+                    <div className="form-group">
                         <label htmlFor="email" className="control-label">Email</label>
-                        <input type="email" id="email" name="email" className="form-control mb-3" value={user.email} onChange={handleChange} placeholder='exemplo@gmail.com' />
+                        <input type="email"
+                            id="email" name="email"
+                            className="form-control mb-3"
+                            value={user.email}
+                            onChange={handleChange}
+                            placeholder='exemplo@gmail.com' />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password" className="control-label">Senha</label>
-                        <input type="password" id="password" name="password" className="form-control mb-3" value={user.password} onChange={handleChange} placeholder='******' />
+                        <input type="password"
+                            id="password" name="password"
+                            className="form-control mb-3"
+                            value={user.password}
+                            onChange={handleChange}
+                            placeholder='******' />
                     </div>
                     <div className="form-group">
                         <input type="submit" value="Salvar" className="btn btn-dark" style={{ marginTop: '10px' }} />

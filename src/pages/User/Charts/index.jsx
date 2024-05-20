@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import DrawerChart from '../../../components/DrawerChart';
+import DrawerChart from '../../../components/DrawerChart/DrawerUserCharts';
 
 const Charts = () => {
     return (

@@ -8,30 +8,26 @@ const Logon = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  // const handleLogin = async () => {
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   if (!emailRegex.test(email)) {
-  //     alert('Por favor, insira um email válido. (...@email.com)');
-  //     return;
-  //   }
-
-  //   try {
-  //     const userData = { email, password };
-  //     const response = await login(userData);
-
-  //     if (response) {
-  //       alert('Login efetuado com sucesso!');
-  //       navigate('/home');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error logging in:', error);
-  //     alert('Erro ao fazer login. Verifique suas credenciais e tente novamente.');
-  //   }
-  // };
-
   const handleLogin = async () => {
-    navigate('/user/home');
-  }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('Por favor, insira um email válido. (...@email.com)');
+      return;
+    }
+
+    try {
+      const userData = { email, password };
+      const response = await login(userData);
+
+      if (response) {
+        alert('Login efetuado com sucesso!');
+        navigate('/user/home');
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      alert('Erro ao fazer login. Verifique suas credenciais e tente novamente.');
+    }
+  };
 
   const handleRegister = () => {
     navigate('/register');
